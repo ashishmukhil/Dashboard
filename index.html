@@ -2,22 +2,71 @@
 <html>
 <head>
   <title>My Dashboard</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: Arial;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-  <h1>My Supabase Data</h1>
-  <pre id="data"></pre>
 
-  <script>
-    fetch("https://sddtphskihjlmlhqqgeq.supabase.co/rest/v1/Nxgsecure_1", {
-      headers: {
-        "apikey": "sb_publishable_T30VIdg_rmLBdIXShKmVNQ_YcpCqW7y",
-        "Authorization": "Bearer sb_publishable_T30VIdg_rmLBdIXShKmVNQ_YcpCqW7y"
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("data").innerText = JSON.stringify(data, null, 2);
-    });
-  </script>
+<h1>My Supabase Data</h1>
+
+<table id="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>PO Number</th>
+      <th>Project</th>
+      <th>Product</th>
+      <th>SKU</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+fetch("https://sddtphskihjlmlhqqgeq.supabase.co/rest/v1/Nxgsecure_1", {
+  headers: {
+    "apikey": "sb_publishable_T30VIdg_rmLBdIXShKmVNQ_YcpCqW7y",
+    "Authorization": "Bearer sb_publishable_T30VIdg_rmLBdIXShKmVNQ_YcpCqW7y"
+  }
+})
+.then(res => res.json())
+.then(data => {
+  const tbody = document.querySelector("#table tbody");
+
+  data.forEach(row => {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${row.id}</td>
+      <td>${row.po_number}</td>
+      <td>${row.project_name}</td>
+      <td>${row.product}</td>
+      <td>${row.sku}</td>
+      <td>${row.start_date}</td>
+      <td>${row.end_date}</td>
+      <td>${row.status}</td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+});
+</script>
+
 </body>
 </html>
