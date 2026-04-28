@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Dashboard</title>
+</head>
+<body>
+  <h1>My Supabase Data</h1>
+  <pre id="data"></pre>
+
+  <script>
+    fetch("https://sddtphskihjlmlhqqgeq.supabase.co/rest/v1/Nxgsecure_1", {
+      headers: {
+        "apikey": "sb_publishable_T30VIdg_rmLBdIXShKmVNQ_YcpCqW7y",
+        "Authorization": "Bearer sb_publishable_T30VIdg_rmLBdIXShKmVNQ_YcpCqW7y"
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("data").innerText = JSON.stringify(data, null, 2);
+    });
+  </script>
+</body>
+</html>
